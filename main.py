@@ -43,6 +43,7 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(MessageHandler(filters.PHOTO, wallpaper))
+    application.add_handler(MessageHandler(filters.Filters.document.mime_type("image/jpeg"), wallpaper))
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
