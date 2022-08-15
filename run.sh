@@ -1,1 +1,1 @@
-python main.py & python test.py
+python3 main.py & python3 test.py
