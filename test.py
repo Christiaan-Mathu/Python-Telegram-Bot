@@ -5,7 +5,6 @@ import tkinter as tk
 class Timer:
     def __init__(self, window):
         # creating window
-        
         # setting attribute
         width= window.winfo_screenwidth()
         height= window.winfo_screenheight()

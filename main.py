@@ -3,7 +3,6 @@ from telegram import __version__ as TG_VER
 from telegram import ForceReply, Update
 from telegram.ext import Application, CommandHandler, ContextTypes, MessageHandler, filters, Updater
 
- 
 
 # Enable logging
 logging.basicConfig(
@@ -11,9 +10,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
-# Define a few command handlers. These usually take the two arguments update and
-# context.
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a message when the command /start is issued."""
     user = update.effective_user
@@ -38,7 +34,6 @@ def main() -> None:
     """Start the bot."""
     # Create the Application and pass it your bot's token.
     application = Application.builder().token("5400373451:AAFfeFB50MDpK4tcIKQLKLqfDwja9_bGdic").build()
-    
     # on different commands - answer in Telegram
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
@@ -47,8 +42,6 @@ def main() -> None:
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
-    
- 
 
 
 
