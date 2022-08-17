@@ -26,8 +26,12 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 
 async def wallpaper(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     #Save the photo to a file
-    await (await context.bot.get_file(update.message.photo[-1].file_id)).download("./images/image.jpg",)
-    await update.message.reply_text("Wallpaper saved!")
+    if update.message.photo:
+        await (await context.bot.get_file(update.message.photo[-1].file_id)).download("./images/image.jpg",)
+        await update.message.reply_text("Wallpaper saved!")
+    else:
+        await (await context.bot.get_file(update.message.document.file_id)).download("./images/image.jpg",)
+        await update.message.reply_text("Wallpaper saved!")
 
 
 def main() -> None:
@@ -38,7 +42,8 @@ def main() -> None:
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
     application.add_handler(MessageHandler(filters.PHOTO, wallpaper))
-    application.add_handler(MessageHandler(filters.Filters.document.mime_type("image/jpeg"), wallpaper))
+    application.add_handler(MessageHandler(filters.Document.IMAGE, wallpaper))
+    application.add_handler(MessageHandler(filters.Document, wallpaper))
 
     # Run the bot until the user presses Ctrl-C
     application.run_polling()
